@@ -1,0 +1,47 @@
+<div class="container home-sections mx-auto flex flex-row justify-center items-center">
+    <div class="images-section pt-3 hidden lg:block">
+        <%= image_tag 'home-phone-bg.jpg', class: 'w-full h-full object-cover rounded-lg' %>
+    </div>
+    <div class="pt-3">
+        <div class="text-center pt-5 w-[23rem] bg-white shadow rounded-lg">
+            <%= image_tag 'logo.png', class: 'max-w-60 mt-4 mb-8 mx-auto' %>
+            <div class="p-5">
+              <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+                <div class="mb-3 mt-4">
+                  <%= f.email_field :email, placeholder: "Phone number, username, or email", class: "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring focus:ring-indigo-200 focus:ring-opacity-50" %>
+                </div>
+                <div class="mb-3">
+                  <%= f.password_field :password, placeholder: "Password", class: "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring focus:ring-indigo-200 focus:ring-opacity-50" %>
+                </div>
+                <%= f.submit "Log in", class: "block w-full text-center py-2 bg-blue-500 text-white font-semibold rounded-md shadow hover:bg-blue-600 transition duration-300" %>
+              <% end %>
+
+              <div class="flex items-center mt-4">
+                  <div class="flex-grow border-t border-gray-300"></div>
+                  <span class="px-4 text-gray-500">OR</span>
+                  <div class="flex-grow border-t border-gray-300"></div>
+              </div>
+
+              <a href="#" class="block mt-4 text-blue-500 font-bold no-underline">
+                  <%= image_tag 'facebook.png', class: 'inline-block w-5 h-5 mr-2' %>
+                  Log in with Facebook
+              </a>
+
+              <% if notice %>
+                  <p class="notice"><%= notice %></p>
+              <% elsif alert %>
+                  <p class="alert"><%= alert %></p>
+              <% end %>
+
+              <a href="#" class="block my-4 text-blue-500 text-sm no-underline">Forgot password?</a>
+            </div>
+        </div>
+
+        <div class="text-center py-2 mt-3 w-[23rem] bg-white shadow rounded-lg">
+            <div class="p-5">
+                Don't have an account?
+                <%= link_to 'Sign_up', new_user_registration_path, class: "my-4 text-blue-500 text-sm no-underline font-semibold" %>
+            </div>
+        </div>
+    </div>
+</div>
