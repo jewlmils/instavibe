@@ -1,29 +1,57 @@
-<h2>Sign up</h2>
+<div class="container home-sections mx-auto flex flex-row justify-center items-center">
+    <div class="pt-3">
+        <div class="text-center pt-5 w-[23rem] mx-auto bg-white shadow rounded-lg">
+            <%= image_tag 'logo.png', class: 'max-w-60 mt-4 mb-8 mx-auto' %>
+            <p class="w-75 text-md font-semibold text-gray-500 px-10 pb-4">Sign up to see photos and videos from your friends</p>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+            <a href="#" class="block text-center py-2 mx-5 bg-blue-500 text-white font-semibold rounded-md shadow hover:bg-blue-600 transition duration-300">
+              <%= image_tag 'facebook.png', alt: 'Facebook', class: 'inline-block w-5 h-5 mr-2' %>
+              Log in with Facebook
+            </a>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
+            <div class="flex items-center mt-4">
+               <div class="flex-grow border-t border-gray-300"></div>
+              <span class="px-4 text-gray-500">OR</span>
+              <div class="flex-grow border-t border-gray-300"></div>
+            </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+            <div class="p-5">
+              <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+                <div class="mb-3 mt-4">
+                  <%= f.email_field :email, placeholder: "Phone number or email", class: "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring focus:ring-indigo-200 focus:ring-opacity-50" %>
+                </div>
+                <div class="mb-3 mt-4">
+                  <%= f.text_field :full_name, placeholder: "Full Name", class: "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring focus:ring-indigo-200 focus:ring-opacity-50" %>
+                </div>
+                <div class="mb-3 mt-4">
+                  <%= f.text_field :username, placeholder: "Username", class: "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring focus:ring-indigo-200 focus:ring-opacity-50" %>
+                </div>
+                <div class="mb-3">
+                  <%= f.password_field :password, placeholder: "Password", class: "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring focus:ring-indigo-200 focus:ring-opacity-50" %>
+                </div>
+                <div class="mb-3">
+                  <%= f.password_field :password_confirmation, placeholder: "Password Confirmation", class: "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring focus:ring-indigo-200 focus:ring-opacity-50" %>
+                </div>
+                <p class="text-sm text-gray-500 py-4">By signing up, you agree to our Terms , Privacy Policy and Cookies Policy.</p>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
+                <%= f.submit "Sign up", class: "block w-full text-center py-2 bg-blue-500 text-white font-semibold rounded-md shadow hover:bg-blue-600 transition duration-300" %>
+              <% end %>
 
-<%= render "devise/shared/links" %>
+              <% if notice %>
+                  <p class="notice"><%= notice %></p>
+              <% elsif alert %>
+                  <p class="alert"><%= alert %></p>
+              <% end %>
+
+            </div>
+        </div>
+
+        <div class="text-center py-2 mt-3 w-[23rem] bg-white shadow rounded-lg mx-auto">
+            <div class="p-5">
+                Have an account?
+                <%= link_to 'Sign in', new_user_session_path, class: "my-4 text-blue-500 text-sm no-underline font-semibold" %>
+            </div>
+        </div>
+    </div>
+</div>

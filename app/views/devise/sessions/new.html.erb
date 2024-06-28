@@ -4,9 +4,7 @@
     </div>
     <div class="pt-3">
         <div class="text-center pt-5 w-[23rem] bg-white shadow rounded-lg">
-            <div class="mx-auto">
-                <%= image_tag 'logo.png', class: 'max-w-60 mt-4 mb-8 mx-auto' %>
-            </div>
+            <%= image_tag 'logo.png', class: 'max-w-60 mt-4 mb-8 mx-auto' %>
             <div class="p-5">
               <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
                 <div class="mb-3 mt-4">
@@ -42,9 +40,7 @@
         <div class="text-center py-2 mt-3 w-[23rem] bg-white shadow rounded-lg">
             <div class="p-5">
                 Don't have an account?
-                <a href="#" class="my-4 text-blue-500 text-sm no-underline font-semibold">
-                    Sign up
-                </a>
+                <%= link_to 'Sign_up', new_user_registration_path, class: "my-4 text-blue-500 text-sm no-underline font-semibold" %>
             </div>
         </div>
     </div>
