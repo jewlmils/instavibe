@@ -1,0 +1,47 @@
+<div id="<%= dom_id post %>">
+  <div class="w-[30rem] bg-white shadow-md rounded-lg overflow-hidden">
+    <div class="p-4 font-bold flex items-center gap-2">
+      <div class="flex justify-between w-full">
+        <div class="flex items-center gap-2">
+          <% if post.user.profile_picture.attached? %>
+            <%= image_tag post.user.profile_picture, class: "rounded-full h-6 w-6 object-cover" %>
+          <% else %>
+            <%= image_tag 'profile-picture.jpg', class: "rounded-full w-6 h-6 object-cover" %>
+          <% end %>
+          <span class="font-bold"><%= post.user.username %></span>
+        </div>
+        <div class="relative">
+          <button onclick="toggleDropdown('<%= dom_id(post) %>')" class="px-2 py-1">
+             <i class="fa-solid fa-ellipsis-vertical"></i>
+          </button>
+          <div id="dropdownMenu-<%= dom_id(post) %>" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md border-2">
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Edit</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Delete</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%= image_tag post.images.last, class: "w-full h-auto" %>
+    <div class="p-4">
+      <p class="text-gray-700"><%= post.caption %></p>
+    </div>
+    <div class="bg-gray-200 p-4">Footer</div>
+  </div>
+</div>
+
+<!-- dropdown functionality -->
+<script>
+  function toggleDropdown(id) {
+    var dropdown = document.getElementById('dropdownMenu-' + id);
+    dropdown.classList.toggle('hidden');
+  }
+
+  document.addEventListener('click', function(event) {
+    var dropdowns = document.querySelectorAll('[id^="dropdownMenu-"]');
+    dropdowns.forEach(function(dropdown) {
+      if (!dropdown.contains(event.target) && !dropdown.previousElementSibling.contains(event.target)) {
+        dropdown.classList.add('hidden');
+      }
+    });
+  });
+</script>

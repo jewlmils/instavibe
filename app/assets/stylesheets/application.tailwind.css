@@ -26,4 +26,9 @@
   .images-section {
     display: none;
   }
+
+  .card-img-top {
+    max-width: 50%;
+    align-self: center;
+  }
 }
