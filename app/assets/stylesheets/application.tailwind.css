@@ -56,4 +56,9 @@
   [data-carousel-item].block {
     opacity: 1;
   }
+
+  /* Optional: Hide scrollbar in WebKit browsers */
+  .card::-webkit-scrollbar {
+    display: none;
+  }
 }
