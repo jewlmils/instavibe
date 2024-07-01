@@ -31,4 +31,23 @@
     max-width: 50%;
     align-self: center;
   }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+    scrollbar-width: none; /* Firefox */
+  }
+}
+
+@layer utilities {
+  [data-carousel-item] {
+    opacity: 0;
+    transition: opacity 0.7s ease-in-out;
+  }
+
+  [data-carousel-item].block {
+    opacity: 1;
+  }
 }

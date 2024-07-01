@@ -1,6 +1,6 @@
 <div id="<%= dom_id post %>">
   <div class="w-[30rem] bg-white shadow-md rounded-lg overflow-hidden">
-    <div class="p-4 font-bold flex items-center gap-2">
+    <div class="p-4 font-bold flex items-center gap-2 border-b border-gray-200 py-4">
       <div class="flex justify-between w-full">
         <div class="flex items-center gap-2">
           <% if post.user.profile_picture.attached? %>
@@ -14,22 +14,62 @@
           <button onclick="toggleDropdown('<%= dom_id(post) %>')" class="px-2 py-1">
              <i class="fa-solid fa-ellipsis-vertical"></i>
           </button>
-          <div id="dropdownMenu-<%= dom_id(post) %>" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md border-2">
+          <div id="dropdownMenu-<%= dom_id(post) %>" class="z-10 hidden absolute right-0 mt-2 w-48 bg-white rounded-md border-2">
             <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Edit</a>
             <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Delete</a>
           </div>
         </div>
       </div>
     </div>
-    <%= image_tag post.images.last, class: "w-full h-auto" %>
-    <div class="p-4">
-      <p class="text-gray-700"><%= post.caption %></p>
+
+    <!-- Carousel -->
+    <div class="relative py-4 rounded-md">
+      <div id="carousel-<%= dom_id(post) %>" class="flex overflow-x-scroll scrollbar-hide">
+        <% post.images.each_with_index do |image, index| %>
+          <%= image_tag image, class: "w-full h-auto flex-shrink-0 object-cover", style: "width: 30rem; height: 20rem;" %>
+        <% end %>
+      </div>
+
+      <!-- Carousel Controls -->
+      <% if post.images.count > 1 %>
+        <button class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" onclick="slideCarousel('<%= dom_id(post) %>', -1)">
+          <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-gray-200 group-hover:bg-gray-400 group-focus:outline-none">
+            <i class="fa-solid fa-chevron-left"></i>
+          </span>
+        </button>
+        <button class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" onclick="slideCarousel('<%= dom_id(post) %>', 1)">
+          <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-gray-200 group-hover:bg-gray-400 group-focus:outline-none">
+            <i class="fa-solid fa-chevron-right"></i>
+          </span>
+        </button>
+      <% end %>
+
+      <!-- Indicator Dots -->
+      <% if post.images.count > 1 %>
+        <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 flex space-x-1">
+          <% post.images.each_with_index do |_, index| %>
+            <div id="indicator-<%= dom_id(post) %>-<%= index %>" class="w-1.5 h-1.5 rounded-full bg-gray-400"></div>
+          <% end %>
+        </div>
+      <% end %>
+      
     </div>
-    <div class="bg-gray-200 p-4">Footer</div>
+
+    <div class="p-4">
+      <p><span class="font-bold mr-2"><%= post.user.username %></span><%= post.caption %></p>
+      <small class="text-gray-500 uppercase text-sm"><%= time_ago_in_words(post.created_at)%> ago</small>
+    </div>
+   <div class="relative bg-white flex items-center border-t border-gray-200 py-2">
+    <input type="text" class="border-none w-full pr-16 pl-4 py-2 focus:ring-0" placeholder="Add a comment...">
+    <div class="absolute inset-y-0 right-0 flex items-center pr-4">
+      <a href="#" class="font-bold text-blue-500 px-4">Post</a>
+    </div>
+  </div>
+
   </div>
 </div>
 
-<!-- dropdown functionality -->
+<!-- Dropdown functionality -->
 <script>
   function toggleDropdown(id) {
     var dropdown = document.getElementById('dropdownMenu-' + id);
@@ -44,4 +84,42 @@
       }
     });
   });
+
+ // Carousel functionality
+function slideCarousel(id, direction) {
+  var carousel = document.getElementById('carousel-' + id);
+  var scrollAmount = carousel.clientWidth;
+  carousel.scrollBy({
+    left: scrollAmount * direction,
+    behavior: 'smooth'
+  });
+  updateIndicators(id); // Update indicators after sliding
+}
+
+// Update Indicator Dots
+function updateIndicators(id) {
+  var carousel = document.getElementById('carousel-' + id);
+  var images = carousel.querySelectorAll('img');
+  var currentIndex = Math.round(carousel.scrollLeft / carousel.clientWidth);
+  
+  // Reset all indicators to gray
+  var indicators = document.querySelectorAll('[id^="indicator-' + id + '-"]');
+  indicators.forEach(function(indicator) {
+    indicator.classList.remove('bg-blue-500');
+    indicator.classList.add('bg-gray-400');
+  });
+  
+  // Set the indicator for the current image to blue
+  var currentIndicator = document.getElementById('indicator-' + id + '-' + currentIndex);
+  currentIndicator.classList.remove('bg-gray-400');
+  currentIndicator.classList.add('bg-blue-500');
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  var carousels = document.querySelectorAll('[id^="carousel-"]');
+  carousels.forEach(function(carousel) {
+    updateIndicators(carousel.id.split('-')[1]); // Initialize indicators
+  });
+});
 </script>
+
