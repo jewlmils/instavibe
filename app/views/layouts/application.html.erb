@@ -12,9 +12,12 @@
   </head>
 
   <body>
-    <main class="mx-auto py-8 px-5 flex">
+    <main>
+      <%= render 'layouts/navbar' %>
       <%= render partial: "shared/notifications", locals: { message: flash[:notice] } %>
-      <%= yield %>
+      <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+        <%= yield %>
+      </div>
     </main>
   </body>
 </html>

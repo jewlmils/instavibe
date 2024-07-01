@@ -57,7 +57,7 @@
 
     <div class="p-4">
       <p><span class="font-bold mr-2"><%= post.user.username %></span><%= post.caption %></p>
-      <small class="text-gray-500 uppercase text-sm"><%= time_ago_in_words(post.created_at)%> ago</small>
+      <small class="text-gray-500 uppercase text-[10px]"><%= time_ago_in_words(post.created_at)%> ago</small>
     </div>
    <div class="relative bg-white flex items-center border-t border-gray-200 py-2">
     <input type="text" class="border-none w-full pr-16 pl-4 py-2 focus:ring-0" placeholder="Add a comment...">
@@ -118,7 +118,7 @@ function updateIndicators(id) {
 document.addEventListener('DOMContentLoaded', function() {
   var carousels = document.querySelectorAll('[id^="carousel-"]');
   carousels.forEach(function(carousel) {
-    updateIndicators(carousel.id.split('-')[1]); // Initialize indicators
+    updateIndicators(carousel.id.split('-')[1]);
   });
 });
 </script>

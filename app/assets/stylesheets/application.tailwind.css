@@ -1,3 +1,4 @@
+/* Ensure Tailwind directives are at the top */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -19,8 +20,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 auto; /* Use shorthand for margin */
   }
 
   .images-section {
@@ -32,12 +32,17 @@
     align-self: center;
   }
 
+  /* Adjusting scrollbar hide */
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
   .scrollbar-hide {
-    -ms-overflow-style: none; /* Internet Explorer 10+ */
+    -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
+  }
+
+  .nav-icon {
+    @apply md:text-2xl block text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500;
   }
 }
 
@@ -47,6 +52,7 @@
     transition: opacity 0.7s ease-in-out;
   }
 
+  /* Adjusting block */
   [data-carousel-item].block {
     opacity: 1;
   }
