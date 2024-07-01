@@ -1,0 +1,14 @@
+<div class="w-full flex flex-col items-center justify-center">
+
+  <% content_for :title, "Posts" %>
+
+  <div id="posts" class="min-w-full">
+    <% @posts.each do |post| %>
+      <%= render post %>
+      <p>
+        <%= link_to "Show this post", post, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+      </p>
+    <% end %>
+  </div>
+</div>
+
