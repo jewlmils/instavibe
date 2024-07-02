@@ -1,0 +1,16 @@
+<div class="flex justify-between">
+    <div class="flex gap-2">
+        <%= image_tag 'profile-picture.jpg', class: "rounded-full w-[2.5rem] h-[2.5rem] object-cover border border-2 border-purple-600", draggable: "false" %>
+        <div class="flex flex-col">
+            <small class="font-bold overflow-hidden text-ellipsis whitespace-nowrap max-w-40">
+                Username
+            </small>
+            <small class="font-medium text-gray-500 text-[.7rem] overflow-hidden text-ellipsis whitespace-nowrap max-w-40">
+                Suggested for you by instagram as he followed you before
+            </small>
+        </div>
+    </div>
+    <%= link_to root_path do %>
+        <small class="font-bold text-blue-500">Follow</small>
+    <% end %>
+</div>
